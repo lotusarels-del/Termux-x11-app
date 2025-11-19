@@ -57,14 +57,16 @@ jobs:
         with:
           name: ${{ matrix.package_variant }}
           path: ./app/build/outputs/apk/debug/*.apk
-      - name: Upload all AAR files
-        uses: actions/upload-artifact@v5
+      - name: 📦 Package X11 Backup Build
+         run:|
+             cd /home/runner/work/Termux-x11-app/
+             GZIP=-9 tar -czvf /home/runner/termux-x11-backup.tar.gz ./*
+
+      - name: ⬆️ Upload OpenSSL Artifact
+        uses: actions/upload-artifact@v4
         with:
-          name: termux-x11-aar-files
-          path: |
-             **/build/outputs/aar/*.aar
-             **/build/intermediates/aar_main_jar/**/*.aar
-             **/build/intermediates/packaged-classes/**/*.aar
+          name: openssl-static-aarch64-3.1.2
+          path: /home/runner/termux-x11-backup.tar.gz    
           
   upload:
     runs-on: ubuntu-latest
