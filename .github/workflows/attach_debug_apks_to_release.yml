@@ -58,7 +58,7 @@ jobs:
           name: ${{ matrix.package_variant }}
           path: ./app/build/outputs/apk/debug/*.apk
       - name: 📦 Package X11 Backup Build
-         run: |
+        run: |
              cd /home/runner/work/Termux-x11-app/
              GZIP=-9 tar -czvf /home/runner/termux-x11-backup.tar.gz ./*
 
